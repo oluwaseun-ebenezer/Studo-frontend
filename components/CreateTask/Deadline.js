@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import SiteContext from "../../context/site_context";
 import Button from "../Button";
 import Input from "../Form/Input";
 
@@ -7,8 +8,10 @@ const Deadline = ({
   scheduleDatePipe,
   scheduleTime,
   scheduleTimePipe,
+  reminder,
+  reminderPipe,
 }) => {
-  const [reminder, setReminder] = useState(0);
+  const { reminders } = useContext(SiteContext);
 
   return (
     <div className="grid gap-4">
@@ -37,27 +40,19 @@ const Deadline = ({
       <div>
         <p className="my-2">Reminder</p>
         <div className="flex flex-wrap gap-1">
-          <Button
-            title="Low"
-            style={`py-1 px-4 rounded-full text-white ${
-              reminder == 0 ? "bg-indigo-900" : "bg-gray-400"
-            }`}
-            action={() => setReminder(0)}
-          />
-          <Button
-            title="Medium"
-            style={`py-1 px-4 rounded-full text-white ${
-              reminder == 1 ? "bg-indigo-900" : "bg-gray-400"
-            }`}
-            action={() => setReminder(1)}
-          />
-          <Button
-            title="High"
-            style={`py-1 px-4 rounded-full text-white ${
-              reminder == 2 ? "bg-indigo-900" : "bg-gray-400"
-            }`}
-            action={() => setReminder(2)}
-          />
+          {reminders.map((item, key) => (
+            <div key={key}>
+              <Button
+                title={item.title.toLocaleUpperCase()}
+                style={`w-full py-1 px-4 rounded-full text-xs font-medium ${
+                  reminder == item.id
+                    ? `${item.color} text-white`
+                    : "bg-gray-300 text-gray-600"
+                }`}
+                action={() => reminderPipe(item.id)}
+              />
+            </div>
+          ))}
         </div>
       </div>
     </div>

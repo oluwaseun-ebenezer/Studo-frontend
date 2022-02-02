@@ -1,8 +1,14 @@
+import { useState } from "react/cjs/react.development";
 import Button from "../../components/Button";
 import Input from "../../components/Form/Input";
 import Layout from "../../components/Layout";
 
 const Signup = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
   return (
     <Layout site_title="Signup">
       <div className="bg-indigo-900 min-h-screen grid content-center pb-0 px-4 sm:py-12 overflow-y-scroll">
@@ -17,24 +23,32 @@ const Signup = () => {
                 name="name"
                 type="text"
                 placeholder="Name"
+                value={name}
+                onChangeAction={setName}
                 style="w-full border-b-2 border-gray-700 appearance-none text-base placeholder-black font-medium focus:outline-none hover:border-b-indigo-400 focus:border-b-indigo-400 focus:border-transparent py-4"
               />
               <Input
                 name="email"
                 type="email"
                 placeholder="E-mail"
+                value={email}
+                onChangeAction={setEmail}
                 style="w-full border-b-2 border-gray-700 appearance-none text-base placeholder-black font-medium focus:outline-none hover:border-b-indigo-400 focus:border-b-indigo-400 focus:border-transparent py-4"
               />
               <Input
                 name="password"
                 type="password"
                 placeholder="Password"
+                value={password}
+                onChangeAction={setPassword}
                 style="w-full border-b-2 border-gray-700 appearance-none text-base placeholder-black font-medium focus:outline-none hover:border-b-indigo-400 focus:border-b-indigo-400 focus:border-transparent py-4"
               />
               <Input
                 name="password"
                 type="password"
                 placeholder="Confirm Password"
+                value={confirmPassword}
+                onChangeAction={setConfirmPassword}
                 style="w-full border-b-2 border-gray-700 appearance-none text-base placeholder-black font-medium focus:outline-none hover:border-b-indigo-400 focus:border-b-indigo-400 focus:border-transparent py-4"
               />
 

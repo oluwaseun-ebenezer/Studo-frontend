@@ -24,10 +24,10 @@ const Tags = ({ priority, priorityPipe, category, categoryPipe }) => {
             <div key={key}>
               <Button
                 title={item.title.toLocaleUpperCase()}
-                style={`w-full p-2 rounded-full ${
+                style={`w-full p-2 rounded-full text-xs font-medium ${
                   priority == item.id
                     ? `${item.color} text-white`
-                    : "bg-gray-300 text-gray-600 text-xs font-medium"
+                    : "bg-gray-300 text-gray-600"
                 }`}
                 action={() => priorityPipe(item.id)}
               />
@@ -43,10 +43,10 @@ const Tags = ({ priority, priorityPipe, category, categoryPipe }) => {
             <div key={key}>
               <Button
                 title={item.title.toLocaleUpperCase()}
-                style={`py-1 px-4 rounded-xl ${
+                style={`py-1 px-4 rounded-xl font-medium text-xs ${
                   category.includes(item.id)
                     ? `${item.color_code} text-white`
-                    : "bg-gray-300 text-gray-600 text-xs font-medium"
+                    : "bg-gray-300 text-gray-600"
                 }`}
                 action={() => tagSelectHandler(item.id)}
               />

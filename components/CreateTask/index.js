@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { submitTask } from "../../helper/task";
 import Button from "../Button";
 import Deadline from "./Deadline";
 import Details from "./Details";
@@ -10,6 +11,7 @@ const CreateTask = ({ closeModal }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [priority, setPriority] = useState(0);
+  const [reminder, setReminder] = useState(0);
   const [category, setCategory] = useState([]);
   const [scheduleDate, setScheduleDate] = useState("");
   const [scheduleTime, setScheduleTime] = useState("");
@@ -58,7 +60,7 @@ const CreateTask = ({ closeModal }) => {
 
       {tab == 1 ? (
         <Tags
-          priority={title}
+          priority={priority}
           priorityPipe={setPriority}
           category={category}
           categoryPipe={setCategory}
@@ -73,6 +75,8 @@ const CreateTask = ({ closeModal }) => {
           scheduleDatePipe={setScheduleDate}
           scheduleTime={scheduleTime}
           scheduleTimePipe={setScheduleTime}
+          reminder={reminder}
+          reminderPipe={setReminder}
         />
       ) : (
         ""
@@ -90,6 +94,18 @@ const CreateTask = ({ closeModal }) => {
           action={() => {
             if (tab != 2) {
               setTab(tab + 1);
+            } else {
+              submitTask({
+                title,
+                description,
+                priority,
+                tags: category,
+                schedule: 1642698959,
+                reminder: 1642698959,
+                tracker: 0,
+                on_screen: 0,
+                time_frame: 0,
+              });
             }
           }}
         />

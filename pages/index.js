@@ -5,14 +5,17 @@ import SelectInput from "../components/Form/SelectInput";
 import { useContext, useState } from "react";
 import ReactModal from "react-modal";
 import TaskContext from "../context/task_context";
+import TaskPreview from "../components/TaskPreview";
 
 const Index = () => {
   const today = new Date(Date.now());
   const [createModal, setCreateModal] = useState(false);
+  const [taskModal, setTaskModal] = useState(false);
 
   const { tasks } = useContext(TaskContext);
 
   const createModalHandler = () => setCreateModal(!createModal);
+  const taskModalHandler = () => setTaskModal(!taskModal);
 
   return (
     <Layout site_title="Task">
@@ -23,7 +26,7 @@ const Index = () => {
               <p className="font-medium text-md">Today</p>
               <p className="font-medium text-xl">{today.toDateString()}</p>
             </div>
-            <div>Collapse</div>
+            <div></div>
           </div>
 
           <div className="grid grid-cols-3 bg-white py-2 border-b border-gray-300">
@@ -51,7 +54,8 @@ const Index = () => {
             {tasks.map((item, key) => (
               <div
                 key={key}
-                className="bg-gray-100 rounded-xl w-full grid gap-4 border"
+                className="bg-gray-100 rounded-xl w-full grid gap-4 border cursor-pointer"
+                onClick={taskModalHandler}
               >
                 <Task
                   title={item.title}
@@ -72,20 +76,39 @@ const Index = () => {
             >
               +
             </p>
-            <div className="w-full flex justify-between py-2">
-              <p>Tasks</p>
-              <p>Calendar</p>
+            <div className="w-full flex py-2 gap-24 sm:gap-96">
+              <button className="w-full flex justify-center">
+                <img
+                  src="icons8-tasks-64.png"
+                  className="object-contain w-8 sm:w-10"
+                />
+              </button>
+              <button className="w-full flex justify-center">
+                <img
+                  src="icons8-calendar-80.png"
+                  className="object-contain w-8 sm:w-10"
+                />
+              </button>
             </div>
           </div>
         </div>
 
         <ReactModal
           isOpen={createModal}
-          contentLabel="Minimal Modal Example"
+          contentLabel="Task Modal"
           ariaHideApp={false}
           className="h-full overflow-scroll flex flex-col px-2 py-10 items-center bg-gray-400 bg-opacity-50"
         >
           <CreateTask closeModal={createModalHandler} />
+        </ReactModal>
+
+        <ReactModal
+          isOpen={taskModal}
+          contentLabel="Task Modal"
+          ariaHideApp={false}
+          className="h-full overflow-scroll flex flex-col px-2 py-10 items-center bg-gray-400 bg-opacity-50"
+        >
+          <TaskPreview closeModal={taskModalHandler} />
         </ReactModal>
       </div>
     </Layout>
